@@ -44,6 +44,18 @@ export function CorrelationHeatmap() {
     row.map((val, j) => (i === j ? null : val))
   );
 
+  // Build customdata matrix for overlap counts (if available)
+  const hasOverlap = !!data.overlap_counts;
+  const overlapData = hasOverlap
+    ? data.overlap_counts!.map((row, i) =>
+        row.map((val, j) => (i === j ? null : val))
+      )
+    : null;
+
+  const hoverTemplate = hasOverlap
+    ? "<b>%{x}</b> ↔ <b>%{y}</b><br>rg = %{z:.3f}<br>shared SNPs: %{customdata:,}<extra></extra>"
+    : "<b>%{x}</b> ↔ <b>%{y}</b><br>rg = %{z:.3f}<extra></extra>";
+
   return (
     <div ref={containerRef} className="flex justify-center rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
       <Plot
@@ -52,6 +64,7 @@ export function CorrelationHeatmap() {
             z: maskedValues,
             x: data.labels,
             y: data.labels,
+            ...(overlapData ? { customdata: overlapData } : {}),
             type: "heatmap",
             colorscale: [
               [0, "#1d4ed8"],
@@ -64,8 +77,7 @@ export function CorrelationHeatmap() {
             zmax: 1,
             connectgaps: false,
             hoverongaps: false,
-            hovertemplate:
-              "<b>%{x}</b> ↔ <b>%{y}</b><br>rg = %{z:.3f}<extra></extra>",
+            hovertemplate: hoverTemplate,
             showscale: true,
             colorbar: {
               title: {
