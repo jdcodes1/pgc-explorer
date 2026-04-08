@@ -17,18 +17,18 @@ class DisorderDataset:
 #   from datasets import get_dataset_config_names
 #   get_dataset_config_names("OpenMed/pgc-<disorder>")
 DISORDERS: list[DisorderDataset] = [
-    DisorderDataset("ADHD", "OpenMed/pgc-adhd", "default", "#e74c3c"),
-    DisorderDataset("Anxiety", "OpenMed/pgc-anxiety", "default", "#e67e22"),
-    DisorderDataset("Autism", "OpenMed/pgc-autism", "default", "#f1c40f"),
-    DisorderDataset("Bipolar", "OpenMed/pgc-bipolar", "default", "#2ecc71"),
-    DisorderDataset("Depression", "OpenMed/pgc-mdd", "default", "#3498db"),
-    DisorderDataset("Substance Use", "OpenMed/pgc-substance-use", "default", "#9b59b6"),
+    DisorderDataset("ADHD", "OpenMed/pgc-adhd", "adhd2022", "#e74c3c"),
+    DisorderDataset("Anxiety", "OpenMed/pgc-anxiety", "anx2026", "#e67e22"),
+    DisorderDataset("Autism", "OpenMed/pgc-autism", "asd2019", "#f1c40f"),
+    DisorderDataset("Bipolar", "OpenMed/pgc-bipolar", "bip2024", "#2ecc71"),
+    DisorderDataset("Depression", "OpenMed/pgc-mdd", "mdd2025", "#3498db"),
+    DisorderDataset("Substance Use", "OpenMed/pgc-substance-use", "SUD2023", "#9b59b6"),
     DisorderDataset("Schizophrenia", "OpenMed/pgc-schizophrenia", "scz2022", "#1abc9c"),
-    DisorderDataset("PTSD", "OpenMed/pgc-ptsd", "default", "#e91e63"),
-    DisorderDataset("OCD/Tourette", "OpenMed/pgc-ocd-tourette", "default", "#00bcd4"),
-    DisorderDataset("Eating Disorders", "OpenMed/pgc-eating-disorders", "default", "#ff9800"),
-    DisorderDataset("Cross-Disorder", "OpenMed/pgc-cross-disorder", "default", "#607d8b"),
-    DisorderDataset("Other", "OpenMed/pgc-other", "default", "#795548"),
+    DisorderDataset("PTSD", "OpenMed/pgc-ptsd", "ptsd2024", "#e91e63"),
+    DisorderDataset("OCD/Tourette", "OpenMed/pgc-ocd-tourette", "ocd2025", "#00bcd4"),
+    DisorderDataset("Eating Disorders", "OpenMed/pgc-eating-disorders", "an2019", "#ff9800"),
+    DisorderDataset("Cross-Disorder", "OpenMed/pgc-cross-disorder", "cdg2025", "#607d8b"),
+    DisorderDataset("Other", "OpenMed/pgc-other", "bpd2025", "#795548"),
 ]
 
 # Column name normalization map.
