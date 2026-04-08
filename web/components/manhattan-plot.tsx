@@ -33,6 +33,7 @@ interface Props {
 }
 
 export function ManhattanPlot({ disorders }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [selected, setSelected] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<ManhattanData[]>([]);
@@ -56,11 +57,12 @@ export function ManhattanPlot({ disorders }: Props) {
   }, [selected]);
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || !containerRef.current) return;
 
-    const width = 1100;
-    const height = 450;
-    const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+    const containerWidth = containerRef.current.offsetWidth;
+    const width = containerWidth;
+    const height = Math.max(400, Math.min(550, containerWidth * 0.4));
+    const margin = { top: 24, right: 24, bottom: 56, left: 64 };
 
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
@@ -84,14 +86,6 @@ export function ManhattanPlot({ disorders }: Props) {
     for (let chr = 1; chr <= 22; chr++) {
       const len = CHR_LENGTHS[chr] || 0;
       const mid = chrOffset + len / 2;
-      svg.append("text")
-        .attr("x", x(mid))
-        .attr("y", height - margin.bottom + 30)
-        .attr("text-anchor", "middle")
-        .attr("fill", "#71717a")
-        .attr("font-size", "10px")
-        .attr("font-family", "monospace")
-        .text(chr);
 
       if (chr % 2 === 0) {
         svg.append("rect")
@@ -100,8 +94,18 @@ export function ManhattanPlot({ disorders }: Props) {
           .attr("width", x(chrOffset + len) - x(chrOffset))
           .attr("height", height - margin.top - margin.bottom)
           .attr("fill", "#27272a")
-          .attr("opacity", 0.5);
+          .attr("opacity", 0.3);
       }
+
+      svg.append("text")
+        .attr("x", x(mid))
+        .attr("y", height - margin.bottom + 28)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#52525b")
+        .attr("font-size", "11px")
+        .attr("font-family", "var(--font-geist-mono), monospace")
+        .text(chr);
+
       chrOffset += len;
     }
 
@@ -113,26 +117,43 @@ export function ManhattanPlot({ disorders }: Props) {
       .attr("y1", y(gwasLine))
       .attr("y2", y(gwasLine))
       .attr("stroke", "#ef4444")
-      .attr("stroke-dasharray", "4,4")
-      .attr("opacity", 0.6);
+      .attr("stroke-dasharray", "6,4")
+      .attr("opacity", 0.5)
+      .attr("stroke-width", 1.5);
+
+    // Significance label
+    svg.append("text")
+      .attr("x", width - margin.right - 4)
+      .attr("y", y(gwasLine) - 6)
+      .attr("text-anchor", "end")
+      .attr("fill", "#ef4444")
+      .attr("opacity", 0.5)
+      .attr("font-size", "10px")
+      .attr("font-family", "var(--font-geist-mono), monospace")
+      .text("p = 5e-8");
 
     // Y axis
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y).ticks(5))
-      .call((g) => g.select(".domain").attr("stroke", "#3f3f46"))
-      .call((g) => g.selectAll(".tick line").attr("stroke", "#3f3f46"))
-      .call((g) => g.selectAll(".tick text").attr("fill", "#a1a1aa").attr("font-family", "monospace"));
+      .call(d3.axisLeft(y).ticks(6))
+      .call((g) => g.select(".domain").remove())
+      .call((g) => g.selectAll(".tick line").attr("stroke", "#27272a").attr("x2", width - margin.left - margin.right).attr("opacity", 0.5))
+      .call((g) =>
+        g.selectAll(".tick text")
+          .attr("fill", "#71717a")
+          .attr("font-family", "var(--font-geist-mono), monospace")
+          .attr("font-size", "11px")
+      );
 
     // Y label
     svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("x", -(height / 2))
-      .attr("y", 15)
+      .attr("y", 16)
       .attr("text-anchor", "middle")
-      .attr("fill", "#a1a1aa")
+      .attr("fill", "#71717a")
       .attr("font-size", "12px")
-      .attr("font-family", "monospace")
+      .attr("font-family", "var(--font-geist-mono), monospace")
       .text("-log\u2081\u2080(p)");
 
     // Plot points
@@ -145,48 +166,63 @@ export function ManhattanPlot({ disorders }: Props) {
         .join("circle")
         .attr("cx", (d) => x(getCumulativePosition(d.chr, d.bp)))
         .attr("cy", (d) => y(d.neglog10p))
-        .attr("r", 2.5)
+        .attr("r", (d) => (d.neglog10p > gwasLine ? 3 : 2))
         .attr("fill", color)
-        .attr("opacity", 0.7);
+        .attr("opacity", (d) => (d.neglog10p > gwasLine ? 0.85 : 0.5));
     });
   }, [datasets, disorders]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-4">
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center gap-3">
         <Select onValueChange={(v: string | null) => v && addDisorder(v)}>
-          <SelectTrigger className="w-64 bg-zinc-900 border-zinc-700">
+          <SelectTrigger className="w-64 border-zinc-700/60 bg-zinc-900/60">
             <SelectValue placeholder="Add disorder (max 3)" />
           </SelectTrigger>
           <SelectContent>
             {disorders.map((d) => (
               <SelectItem key={d.name} value={d.name} disabled={selected.includes(d.name)}>
-                {d.name}
+                <div className="flex items-center gap-2">
+                  <div
+                    className="h-2 w-2 rounded-full"
+                    style={{ backgroundColor: d.color }}
+                  />
+                  {d.name}
+                </div>
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {selected.map((name) => {
             const meta = disorders.find((d) => d.name === name);
             return (
               <Badge
                 key={name}
                 variant="outline"
-                className="cursor-pointer border-zinc-600"
-                style={{ color: meta?.color }}
+                className="cursor-pointer gap-1.5 border-zinc-700/60 px-3 py-1 text-sm transition-colors hover:border-zinc-600"
                 onClick={() => removeDisorder(name)}
               >
-                {name} ✕
+                <div
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: meta?.color }}
+                />
+                <span style={{ color: meta?.color }}>{name}</span>
+                <span className="text-zinc-600">x</span>
               </Badge>
             );
           })}
         </div>
       </div>
-      <svg ref={svgRef} className="w-full" />
-      {selected.length === 0 && (
-        <p className="text-center text-sm text-zinc-500">Select up to 3 disorders to overlay</p>
-      )}
+      <div ref={containerRef} className="overflow-hidden rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
+        {selected.length === 0 ? (
+          <div className="flex h-[400px] items-center justify-center">
+            <p className="text-sm text-zinc-600">Select up to 3 disorders to overlay their Manhattan plots</p>
+          </div>
+        ) : (
+          <svg ref={svgRef} className="w-full" />
+        )}
+      </div>
     </div>
   );
 }

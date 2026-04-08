@@ -30,9 +30,17 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100">
         <Nav />
-        <main className="mx-auto w-full max-w-7xl px-6 py-8">
+        <main className="mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-8 lg:px-12">
           {children}
         </main>
+        <footer className="mt-auto border-t border-zinc-800/50 py-6">
+          <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-12">
+            <p className="text-xs text-zinc-600">
+              Data from the <span className="text-zinc-500">Psychiatric Genomics Consortium</span> via HuggingFace.
+              Visualizations are exploratory — not for clinical use.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );

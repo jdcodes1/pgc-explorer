@@ -1,17 +1,1 @@
-{
-  "disorders": [
-    {"name": "Schizophrenia", "snpCount": 50000, "color": "#1abc9c"},
-    {"name": "Bipolar", "snpCount": 35000, "color": "#2ecc71"},
-    {"name": "Depression", "snpCount": 80000, "color": "#3498db"},
-    {"name": "ADHD", "snpCount": 20000, "color": "#e74c3c"},
-    {"name": "Autism", "snpCount": 15000, "color": "#f1c40f"},
-    {"name": "PTSD", "snpCount": 45000, "color": "#e91e63"},
-    {"name": "Anxiety", "snpCount": 25000, "color": "#e67e22"},
-    {"name": "OCD/Tourette", "snpCount": 12000, "color": "#00bcd4"},
-    {"name": "Eating Disorders", "snpCount": 8000, "color": "#ff9800"},
-    {"name": "Substance Use", "snpCount": 60000, "color": "#9b59b6"},
-    {"name": "Cross-Disorder", "snpCount": 40000, "color": "#607d8b"},
-    {"name": "Other", "snpCount": 10000, "color": "#795548"}
-  ],
-  "totalSnps": 400000
-}
+{"disorders": [{"name": "ADHD", "snpCount": 7033, "color": "#e74c3c"}, {"name": "Anxiety", "snpCount": 12815, "color": "#e67e22"}, {"name": "Autism", "snpCount": 4027, "color": "#f1c40f"}, {"name": "Bipolar", "snpCount": 5346, "color": "#2ecc71"}, {"name": "Depression", "snpCount": 7014, "color": "#3498db"}, {"name": "Schizophrenia", "snpCount": 112770, "color": "#1abc9c"}, {"name": "PTSD", "snpCount": 618, "color": "#e91e63"}, {"name": "Eating Disorders", "snpCount": 348, "color": "#ff9800"}, {"name": "Cross-Disorder", "snpCount": 10234, "color": "#607d8b"}], "totalSnps": 160205}
