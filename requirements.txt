@@ -2,5 +2,6 @@ datasets>=3.0
 polars>=1.0
 scipy>=1.14
 numpy>=2.0
+duckdb>=1.0
 jupyter
 matplotlib
