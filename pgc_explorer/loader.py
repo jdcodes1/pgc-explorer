@@ -35,7 +35,11 @@ def load_disorder(disorder: DisorderDataset, p_threshold: float = 1e-5, download
         signal.alarm(download_timeout)
         try:
             ds = load_dataset(disorder.hf_id, disorder.config, split="train")
-            df = pl.from_arrow(ds.data.table)
+            # Try Polars from Arrow; if types are incompatible, convert via pandas
+            try:
+                df = pl.from_arrow(ds.data.table)
+            except Exception:
+                df = pl.from_pandas(ds.to_pandas())
         finally:
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old_handler)
