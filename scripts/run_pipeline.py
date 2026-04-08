@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import time
 from pathlib import Path
 
 # Add project root to path
@@ -38,7 +39,9 @@ def main():
     disorders = {}
     failed = []
 
-    for d in DISORDERS:
+    for i, d in enumerate(DISORDERS):
+        if i > 0:
+            time.sleep(5)  # Small delay between datasets to avoid rate limits
         print(f"  Loading {d.name} ({d.hf_id}, config={d.config})...")
         try:
             df = load_disorder(d, p_threshold=1e-5)
