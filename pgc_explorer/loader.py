@@ -7,20 +7,13 @@ import polars as pl
 
 from pgc_explorer.config import DisorderDataset, normalize_columns
 
-_CONNECTION = None
-
-
 def _get_connection() -> duckdb.DuckDBPyConnection:
-    """Create or reuse a DuckDB connection with HuggingFace auth."""
-    global _CONNECTION
-    if _CONNECTION is not None:
-        return _CONNECTION
+    """Create a fresh DuckDB connection with HuggingFace auth."""
     con = duckdb.connect()
     con.execute("INSTALL httpfs; LOAD httpfs;")
     token = os.environ.get("HF_TOKEN", "")
     if token:
         con.execute(f"CREATE SECRET (TYPE HUGGINGFACE, TOKEN '{token}')")
-    _CONNECTION = con
     return con
 
 
