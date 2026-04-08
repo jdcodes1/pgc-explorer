@@ -91,7 +91,8 @@ def _load_streaming(disorder: DisorderDataset, p_threshold: float) -> pl.DataFra
     if not rows:
         return pl.DataFrame({"snp": [], "chr": [], "bp": [], "p": [], "beta": []})
 
-    df = pl.DataFrame(rows)
+    import pandas as pd
+    df = pl.from_pandas(pd.DataFrame(rows))
     return _process_dataframe(df, disorder, p_threshold, already_filtered=True)
 
 
