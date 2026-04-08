@@ -1,0 +1,17 @@
+{
+  "disorder": "Schizophrenia",
+  "snps": [
+    {"snp": "rs1000", "chr": 1, "bp": 1500000, "neglog10p": 12.5, "beta": 0.15},
+    {"snp": "rs1001", "chr": 1, "bp": 5200000, "neglog10p": 8.2, "beta": -0.10},
+    {"snp": "rs1002", "chr": 2, "bp": 3000000, "neglog10p": 9.8, "beta": 0.22},
+    {"snp": "rs1003", "chr": 3, "bp": 45000000, "neglog10p": 15.3, "beta": 0.18},
+    {"snp": "rs1004", "chr": 6, "bp": 28000000, "neglog10p": 25.1, "beta": 0.35},
+    {"snp": "rs1005", "chr": 6, "bp": 32000000, "neglog10p": 18.7, "beta": 0.28},
+    {"snp": "rs1006", "chr": 8, "bp": 12000000, "neglog10p": 7.5, "beta": -0.12},
+    {"snp": "rs1007", "chr": 11, "bp": 65000000, "neglog10p": 10.2, "beta": 0.16},
+    {"snp": "rs1008", "chr": 15, "bp": 40000000, "neglog10p": 8.9, "beta": -0.14},
+    {"snp": "rs1009", "chr": 19, "bp": 20000000, "neglog10p": 11.4, "beta": 0.20},
+    {"snp": "rs1010", "chr": 22, "bp": 30000000, "neglog10p": 9.1, "beta": 0.13}
+  ],
+  "count": 11
+}

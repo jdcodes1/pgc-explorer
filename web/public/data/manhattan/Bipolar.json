@@ -1,0 +1,17 @@
+{
+  "disorder": "Bipolar",
+  "snps": [
+    {"snp": "rs2000", "chr": 1, "bp": 8500000, "neglog10p": 10.1, "beta": 0.12},
+    {"snp": "rs2001", "chr": 2, "bp": 15000000, "neglog10p": 7.8, "beta": -0.09},
+    {"snp": "rs2002", "chr": 3, "bp": 52000000, "neglog10p": 13.4, "beta": 0.19},
+    {"snp": "rs2003", "chr": 5, "bp": 90000000, "neglog10p": 8.6, "beta": 0.11},
+    {"snp": "rs2004", "chr": 6, "bp": 30000000, "neglog10p": 16.2, "beta": 0.25},
+    {"snp": "rs2005", "chr": 7, "bp": 25000000, "neglog10p": 9.3, "beta": -0.13},
+    {"snp": "rs2006", "chr": 10, "bp": 70000000, "neglog10p": 11.7, "beta": 0.17},
+    {"snp": "rs2007", "chr": 12, "bp": 45000000, "neglog10p": 7.4, "beta": -0.08},
+    {"snp": "rs2008", "chr": 16, "bp": 30000000, "neglog10p": 14.5, "beta": 0.21},
+    {"snp": "rs2009", "chr": 20, "bp": 40000000, "neglog10p": 8.1, "beta": 0.10},
+    {"snp": "rs2010", "chr": 22, "bp": 25000000, "neglog10p": 9.9, "beta": -0.15}
+  ],
+  "count": 11
+}

@@ -1,0 +1,17 @@
+{
+  "disorder": "Depression",
+  "snps": [
+    {"snp": "rs3000", "chr": 1, "bp": 72000000, "neglog10p": 9.4, "beta": 0.08},
+    {"snp": "rs3001", "chr": 2, "bp": 120000000, "neglog10p": 11.2, "beta": -0.11},
+    {"snp": "rs3002", "chr": 4, "bp": 35000000, "neglog10p": 7.9, "beta": 0.07},
+    {"snp": "rs3003", "chr": 5, "bp": 140000000, "neglog10p": 13.8, "beta": 0.14},
+    {"snp": "rs3004", "chr": 6, "bp": 29000000, "neglog10p": 10.5, "beta": 0.12},
+    {"snp": "rs3005", "chr": 7, "bp": 100000000, "neglog10p": 8.3, "beta": -0.09},
+    {"snp": "rs3006", "chr": 9, "bp": 20000000, "neglog10p": 15.1, "beta": 0.19},
+    {"snp": "rs3007", "chr": 13, "bp": 55000000, "neglog10p": 7.6, "beta": 0.06},
+    {"snp": "rs3008", "chr": 17, "bp": 45000000, "neglog10p": 12.3, "beta": -0.16},
+    {"snp": "rs3009", "chr": 18, "bp": 50000000, "neglog10p": 8.7, "beta": 0.10},
+    {"snp": "rs3010", "chr": 21, "bp": 25000000, "neglog10p": 9.5, "beta": -0.07}
+  ],
+  "count": 11
+}
