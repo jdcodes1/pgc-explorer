@@ -39,12 +39,17 @@ export function CorrelationHeatmap() {
     );
   }
 
+  // Null out the diagonal so it renders as empty/grey
+  const maskedValues = data.values.map((row, i) =>
+    row.map((val, j) => (i === j ? null : val))
+  );
+
   return (
     <div ref={containerRef} className="flex justify-center rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
       <Plot
         data={[
           {
-            z: data.values,
+            z: maskedValues,
             x: data.labels,
             y: data.labels,
             type: "heatmap",
@@ -57,6 +62,8 @@ export function CorrelationHeatmap() {
             ],
             zmin: -1,
             zmax: 1,
+            connectgaps: false,
+            hoverongaps: false,
             hovertemplate:
               "<b>%{x}</b> ↔ <b>%{y}</b><br>rg = %{z:.3f}<extra></extra>",
             showscale: true,
