@@ -19,3 +19,9 @@ web/out/
 # Env
 .env*.local
 .env
+
+# Logs
+*.log
+
+# Vercel
+.vercel/
