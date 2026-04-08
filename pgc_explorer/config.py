@@ -24,10 +24,10 @@ DISORDERS: list[DisorderDataset] = [
     DisorderDataset("Depression", "OpenMed/pgc-mdd", "mdd2025", "#3498db"),
     DisorderDataset("Substance Use", "OpenMed/pgc-substance-use", "SUD2023", "#9b59b6"),
     DisorderDataset("Schizophrenia", "OpenMed/pgc-schizophrenia", "scz2022", "#1abc9c"),
-    DisorderDataset("PTSD", "OpenMed/pgc-ptsd", "ptsd2024", "#e91e63"),
+    DisorderDataset("PTSD", "OpenMed/pgc-ptsd", "ptsd2019", "#e91e63"),
     DisorderDataset("OCD/Tourette", "OpenMed/pgc-ocd-tourette", "ocd2025", "#00bcd4"),
-    DisorderDataset("Eating Disorders", "OpenMed/pgc-eating-disorders", "an2019", "#ff9800"),
-    DisorderDataset("Cross-Disorder", "OpenMed/pgc-cross-disorder", "cdg2025", "#607d8b"),
+    DisorderDataset("Eating Disorders", "OpenMed/pgc-eating-disorders", "an2017", "#ff9800"),
+    DisorderDataset("Cross-Disorder", "OpenMed/pgc-cross-disorder", "cdg2019", "#607d8b"),
     DisorderDataset("Other", "OpenMed/pgc-other", "bpd2025", "#795548"),
 ]
 
@@ -35,15 +35,15 @@ DISORDERS: list[DisorderDataset] = [
 # Different publications use different column names for the same data.
 # Keys are canonical names, values are possible source column names (tried in order).
 COLUMN_MAP: dict[str, list[str]] = {
-    "snp": ["SNP", "ID", "SNPID", "MarkerName", "rsid", "variant_id"],
-    "chr": ["CHR", "chromosome", "chr", "hm_chrom", "#CHROM"],
+    "snp": ["SNP", "ID", "SNPID", "MarkerName", "rsid", "variant_id", "snpid"],
+    "chr": ["CHR", "CHROM", "chromosome", "chr", "hm_chrom", "#CHROM"],
     "bp": ["BP", "POS", "position", "base_pair_location", "hm_pos"],
     "a1": ["A1", "ALT", "effect_allele", "allele1", "Allele1"],
     "a2": ["A2", "REF", "other_allele", "allele2", "Allele2"],
     "beta": ["BETA", "beta", "Effect", "b", "logOR"],
     "or_val": ["OR"],
     "se": ["SE", "StdErr", "se", "standard_error"],
-    "p": ["P", "Pval", "p_value", "P-value", "pval", "PVALUE", "p-value"],
+    "p": ["P", "Pval", "PVAL", "p_value", "P-value", "pval", "PVALUE", "p-value"],
     "freq": ["FRQ", "MAF", "Freq1", "frequency", "EAF", "A1FREQ"],
 }
 

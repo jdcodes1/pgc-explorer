@@ -28,6 +28,10 @@ def load_disorder(disorder: DisorderDataset, p_threshold: float = 1e-5) -> pl.Da
     rename_map = {source: canonical for canonical, source in col_map.items()}
     df = df.rename(rename_map)
 
+    # Cast p-value to Float64 (some datasets have string or other types)
+    df = df.with_columns(pl.col("p").cast(pl.Float64, strict=False))
+    df = df.filter(pl.col("p").is_not_null())
+
     # Filter to significant SNPs
     df = df.filter(pl.col("p") < p_threshold)
 
