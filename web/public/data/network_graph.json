@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {"id": "SCZ", "sigLoci": 300, "color": "#1abc9c"},
+    {"id": "BIP", "sigLoci": 200, "color": "#2ecc71"},
+    {"id": "MDD", "sigLoci": 400, "color": "#3498db"},
+    {"id": "ADHD", "sigLoci": 100, "color": "#e74c3c"},
+    {"id": "ASD", "sigLoci": 80, "color": "#f1c40f"},
+    {"id": "PTSD", "sigLoci": 250, "color": "#e91e63"},
+    {"id": "ANX", "sigLoci": 150, "color": "#e67e22"},
+    {"id": "OCD", "sigLoci": 60, "color": "#00bcd4"},
+    {"id": "ED", "sigLoci": 40, "color": "#ff9800"},
+    {"id": "SU", "sigLoci": 300, "color": "#9b59b6"},
+    {"id": "XD", "sigLoci": 200, "color": "#607d8b"},
+    {"id": "OTH", "sigLoci": 50, "color": "#795548"}
+  ],
+  "links": [
+    {"source": "SCZ", "target": "BIP", "weight": 0.68},
+    {"source": "SCZ", "target": "MDD", "weight": 0.35},
+    {"source": "BIP", "target": "MDD", "weight": 0.40},
+    {"source": "MDD", "target": "ANX", "weight": 0.55},
+    {"source": "MDD", "target": "PTSD", "weight": 0.45},
+    {"source": "PTSD", "target": "ANX", "weight": 0.50},
+    {"source": "ADHD", "target": "SU", "weight": 0.35},
+    {"source": "ADHD", "target": "MDD", "weight": 0.30},
+    {"source": "SCZ", "target": "XD", "weight": 0.45},
+    {"source": "BIP", "target": "XD", "weight": 0.42},
+    {"source": "OCD", "target": "ANX", "weight": 0.30},
+    {"source": "MDD", "target": "ED", "weight": 0.25}
+  ]
+}
