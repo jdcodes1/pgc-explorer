@@ -7,7 +7,7 @@ import polars as pl
 
 from pgc_explorer.config import DisorderDataset, normalize_columns
 
-def _get_connection() -> duckdb.DuckDBPyConnection:
+def get_connection() -> duckdb.DuckDBPyConnection:
     """Create a fresh DuckDB connection with HuggingFace auth."""
     con = duckdb.connect()
     con.execute("INSTALL httpfs; LOAD httpfs;")
@@ -15,6 +15,11 @@ def _get_connection() -> duckdb.DuckDBPyConnection:
     if token:
         con.execute(f"CREATE SECRET (TYPE HUGGINGFACE, TOKEN '{token}')")
     return con
+
+
+def build_hf_path(disorder: DisorderDataset) -> str:
+    """Build the HuggingFace parquet URL for a disorder dataset."""
+    return f"hf://datasets/{disorder.hf_id}/data/{disorder.config}/*.parquet"
 
 
 def load_disorder(disorder: DisorderDataset, p_threshold: float = 1e-5, max_retries: int = 3) -> pl.DataFrame:
@@ -30,10 +35,10 @@ def load_disorder(disorder: DisorderDataset, p_threshold: float = 1e-5, max_retr
     Returns:
         Polars DataFrame with canonical column names.
     """
-    con = _get_connection()
+    con = get_connection()
 
     # Build the HF parquet URL
-    hf_path = f"hf://datasets/{disorder.hf_id}/data/{disorder.config}/*.parquet"
+    hf_path = build_hf_path(disorder)
 
     for attempt in range(1, max_retries + 1):
         try:

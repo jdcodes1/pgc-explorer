@@ -19,6 +19,7 @@ export interface ManhattanData {
 export interface CorrelationMatrix {
   labels: string[];
   values: number[][];
+  overlap_counts?: number[][];
 }
 
 export interface NetworkNode {
