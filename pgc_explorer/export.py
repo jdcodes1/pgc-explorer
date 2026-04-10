@@ -33,7 +33,8 @@ def export_manhattan_data(disorders: dict[str, pl.DataFrame], output_dir: Path) 
         records.sort(key=lambda r: (r["chr"] or 0, r["bp"] or 0))
 
         data = {"disorder": name, "snps": records, "count": len(records)}
-        (manhattan_dir / f"{name}.json").write_text(json.dumps(data))
+        safe_name = name.replace("/", "-")
+        (manhattan_dir / f"{safe_name}.json").write_text(json.dumps(data))
 
 
 def export_network_graph(
